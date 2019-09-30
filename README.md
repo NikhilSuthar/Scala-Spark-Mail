@@ -22,7 +22,7 @@ all properties mentioned in application.conf file.
 **Version**
 * Scala "2.11.12"
 
-#How to Use in Program
+# How to Use in Program
 * Download attached Jar or src code and compile it with required dependencies
 * Add this Jar dependencies in Spark Project (in Build.sbt) like below:
   
