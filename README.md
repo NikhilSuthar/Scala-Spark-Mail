@@ -36,3 +36,25 @@ all properties mentioned in application.conf file.
    `val Emailobj = new Email(<path of Conf file>)`
    
    `Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)`
+   
+  # Sample Spark Code
+  
+    `object TestSPark {`
+       
+    `def main(args: Array[String]): Unit = {`
+    
+    `try{`
+    
+   ` /* Logic of Spark Program */`
+   
+    `} catch {`
+           `  case e: Exception => ` 
+		` val msg = e.toString`    
+       `  val Emailobj = new Email(<path of Conf file>)`       
+		`Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)`
+     `}`
+     
+     `}`
+     
+  `}`
+ 
