@@ -49,8 +49,7 @@ all properties mentioned in application.conf file.
    
     `} catch {`
            `  case e: Exception => ` 
-	   
-		` val msg = e.toString`    
+	   		` val msg = e.toString`    
        `  val Emailobj = new Email(<path of Conf file>)`       
 		`Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)`
      `}`
