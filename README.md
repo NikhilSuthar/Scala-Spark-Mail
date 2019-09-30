@@ -48,7 +48,7 @@ all properties mentioned in application.conf file.
    ` /* Logic of Spark Program */`
    
     `} catch {`
-           `  case e: Exception => ` \
+           `  case e: Exception => ` 
 	   
 		` val msg = e.toString`    
        `  val Emailobj = new Email(<path of Conf file>)`       
