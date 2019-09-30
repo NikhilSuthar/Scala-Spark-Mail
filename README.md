@@ -43,7 +43,7 @@ It is very easy to use, you need to create a object and provide a complete path 
 
 
 
-* Import method in Scala Object or Class
+* Import method in Spark Scala Object or Class
 * Initialize Email Object as below
    
    `val msg = "Spark Job failed" //you can initialize msg as exception of failure`
