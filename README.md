@@ -28,7 +28,7 @@ It is very easy to use, you need to create a object and provide a complete path 
  
 * Edit configuration file and add below properties 
   	
-	`email {`
+	`email {
 		
 		email_host="smtp.gmail.com"
 		
@@ -39,13 +39,13 @@ It is very easy to use, you need to create a object and provide a complete path 
 		email_password="welcome123"
         	
 		email_recipient="<list of receipent mail with comma separated>"
-        	}
-		
-	`spark {`
+        	}`
+	
+	`spark {
 
 		appName = "Spark_Test_Job"
 
-		}
+		}`
 
 
 
