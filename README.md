@@ -5,17 +5,12 @@ It is very easy to use, you need to create a object and provide a complete path 
 
 **Library Dependencies**
 
-`libraryDependencies ++= Seq(`
-
-  `"com.typesafe" % "config" % "1.3.3",`
-  
-  `"org.scala-lang" % "scala-compiler" % "2.11.12",`
-  
- ` "org.json4s" %% "json4s-core" % "3.5.3",`
-  
-  `"javax.mail" % "mail" % "1.4.7"`
-
-`)`
+	libraryDependencies ++= Seq(
+ 	 "com.typesafe" % "config" % "1.3.3",
+ 	  "org.scala-lang" % "scala-compiler" % "2.11.12",
+  	 "org.json4s" %% "json4s-core" % "3.5.3",
+  	 "javax.mail" % "mail" % "1.4.7"
+	)
 
 **Version**
 * Scala "2.11.12"
