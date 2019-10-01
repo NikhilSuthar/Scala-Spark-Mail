@@ -47,21 +47,17 @@ It is very easy to use, you need to create a object and provide a complete path 
    
   # Sample Spark Code
   
-   	object TestSPark {
-     
-   	 def main(args: Array[String]): Unit = {
-    
-   		 try{
-    
-  		  /* Logic of Spark Program */
-   
-   		 } catch {
-         		case e: Exception =>  
-	   	 	val msg = e.toString    
-      		   	val Emailobj = new Email(<path of Conf file>)       
-			Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)
-     		}     
-   	  }
+  	 	object TestSPark {
+        		 def main(args: Array[String]): Unit = {
+       			 try{
+      		  	/* Logic of Spark Program */
+      		 	} catch {
+         			case e: Exception =>  
+	   	 		val msg = e.toString    
+      		   		val Emailobj = new Email(<path of Conf file>)       
+				Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)
+     				}     
+   	  		}
      
 
  
