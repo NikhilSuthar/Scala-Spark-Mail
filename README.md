@@ -41,30 +41,27 @@ It is very easy to use, you need to create a object and provide a complete path 
 * Import method in Spark Scala Object or Class
 * Initialize Email Object as below
    
-   `val msg = "Spark Job failed" //you can initialize msg as exception of failure`
-   
-   `val Emailobj = new Email(<path of Conf file>)`
-   
-   `Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)`
+  		val msg = "Spark Job failed" //you can initialize msg as exception of failure
+ 		val Emailobj = new Email(<path of Conf file>)
+		Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)
    
   # Sample Spark Code
   
-    `object TestSPark {`
-       
-    `def main(args: Array[String]): Unit = {`
+   	object TestSPark {
+     
+   	 def main(args: Array[String]): Unit = {
     
-    `try{`
+   		 try{
     
-   ` /* Logic of Spark Program */`
+  		  /* Logic of Spark Program */
    
-    `} catch {`
-           `  case e: Exception => ` 
-	   		` val msg = e.toString`    
-       `  val Emailobj = new Email(<path of Conf file>)`       
-		`Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)`
-     `}`
+   		 } catch {
+         		case e: Exception =>  
+	   	 	val msg = e.toString    
+      		   	val Emailobj = new Email(<path of Conf file>)       
+			Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)
+     		}     
+   	  }
      
-     `}`
-     
-  `}`
+
  
