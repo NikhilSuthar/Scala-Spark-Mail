@@ -45,12 +45,12 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
    sendMail method comes with four parameters, in which three parameters are optional. Please find below details:
     
     * **sendMail(message, SparkApplicationId, MailSubjectLine,MailType)**
-		* *sendMail(message,SparkApplicationId,"","F")*: Send message as Failure with subject as "Alert:Spark SparkAppName Job.".
-		* *sendMail(message,SparkApplicationId,MailSubjectLine,"F")*: Send message as Failure with subject as MailSubjectLine.
-		* *sendMail(message,SparkApplicationId,"","S")*: Send message as Sucess with subject as "Alert:Spark SparkAppName Job.".
-		* *sendMail(message,SparkApplicationId,MailSubjectLine,"S")*: Send message as Sucess with subject as MailSubjectLine.
-		* *sendMail(message,SparkApplicationId)*: Send message as Sucess with subject as "Alert:Spark SparkAppName Job.". 
-		* *sendMail(message)*: Send message as Sucess with subject as "Alert:Spark SparkAppName Job.". It can use for Scala Job without Spark. 
+		* ***sendMail(message,SparkApplicationId,"","F")***: Send message as Failure with subject as "Alert:Spark SparkAppName Job.".
+		* ***sendMail(message,SparkApplicationId,MailSubjectLine,"F")***: Send message as Failure with subject as MailSubjectLine.
+		* ***sendMail(message,SparkApplicationId,"","S")***: Send message as Sucess with subject as "Alert:Spark SparkAppName Job.".
+		* ***sendMail(message,SparkApplicationId,MailSubjectLine,"S")***: Send message as Sucess with subject as MailSubjectLine.
+		* ***sendMail(message,SparkApplicationId)***: Send message as Sucess with subject as "Alert:Spark SparkAppName Job.". 
+		* ***sendMail(message)***: Send message as Sucess with subject as "Alert:Spark SparkAppName Job.". It can use for Scala Job without Spark. 
 		
     * **Default Value**
 		* SparkApplicationId = blank ("")
