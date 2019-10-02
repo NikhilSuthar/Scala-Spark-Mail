@@ -10,7 +10,9 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
 
 # How to Use in Program
 * Download complete Jar file directly from below path or else clone it and compile it using command `sbt clean assembly`
-
+ 
+    https://github.com/NikhilSuthar/ScalaMail/tree/master/Jar
+  
 * Add this Jar dependencies in Spark Project (in build.sbt) like below:
   
   `"com.spark.mail" %% "Email" % "0.0.1" from "file:///<path of Jar>/Scala_Spark_Mail.jar"`
@@ -53,7 +55,7 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
     * **Default Value**
 		* SparkApplicationId = blank ("")
 		* MailSubjectLine = "Alert:Spark <SparkAppName> Job."
-		* MailType = "S"
+		* MailType = "S"  
 			* F - For Failure 
 			* S or Blank("") - For Success
 	
