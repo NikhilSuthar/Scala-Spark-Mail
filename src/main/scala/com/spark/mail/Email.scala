@@ -42,6 +42,7 @@ class Email(Conf:String) {
     CommandMap.setDefaultCommandMap(mc)
     // Thread.currentThread.setContextClassLoader(getClass.getClassLoader)
     val DateTime = Calendar.getInstance().getTime
+
     val properties = new Properties()
     properties.put("mail.smtp.port", Email_port)
     properties.put("mail.smtp.auth", "true")
