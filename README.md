@@ -1,30 +1,19 @@
 # ScalaMail
-This utility can be used to send Spark job failure message in mail. This Utility uses smtp protocol to send mail.
-It is very easy to use, you need to create a object and provide a complete path of Configuratin file where you need to mentioned all properties mentioned in application.conf file.
+This utility uses to send Spark job failure and Success message in mail. It uses smtp protocol to send mail.
+It is very easy to use, you just need to create a object and provide a complete path of Configuratin file where you need to mentioned all properties mentioned in below application.conf file.
 
+https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/application.conf
 
-**Library Dependencies**
-
-`libraryDependencies ++= Seq(`
-
-  `"com.typesafe" % "config" % "1.3.3",`
-  
-  `"org.scala-lang" % "scala-compiler" % "2.11.12",`
-  
- ` "org.json4s" %% "json4s-core" % "3.5.3",`
-  
-  `"javax.mail" % "mail" % "1.4.7"`
-
-`)`
-
-**Version**
+**Compiled Version**
 * Scala "2.11.12"
+* SBT 1.2.8
 
 # How to Use in Program
-* Download attached Jar or src code and compile it with required dependencies
-* Add this Jar dependencies in Spark Project (in Build.sbt) like below:
+* Download complete Jar file directly from below path or else clone it and compile it using command `sbt clean assembly`
+
+* Add this Jar dependencies in Spark Project (in build.sbt) like below:
   
-  `"com.spark.mail" %% "Email" % "0.0.1" from "file:///<path of Jar>/email_2.11-0.0.1.jar"`
+  `"com.spark.mail" %% "Email" % "0.0.1" from "file:///<path of Jar>/Scala_Spark_Mail.jar"`
  
 * Edit configuration file and add below properties 
   	
@@ -41,8 +30,6 @@ It is very easy to use, you need to create a object and provide a complete path 
 		}
 
 
-
-
 * Import method in Spark Scala Object or Class
 * Initialize Email Object as below
    
@@ -50,7 +37,27 @@ It is very easy to use, you need to create a object and provide a complete path 
    
    `val Emailobj = new Email(<path of Conf file>)`
    
-   `Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)`
+   `Emailobj.sendMail(msg)`
+   
+   # sendMail Method
+   sendMail method comes with four parameters, in which three parameters are optional. Please find below details:
+    
+    * **sendMail(message, SparkApplicationId, MailSubjectLine,MailType)**
+		* sendMail(message,SparkApplicationId,"","F"): Send message as Failure with subject as "Alert:Spark SparkAppName Job.".
+		* sendMail(message,SparkApplicationId,MailSubjectLine,"F"): Send message as Failure with subject as MailSubjectLine.
+		* sendMail(message,SparkApplicationId,"","S"): Send message as Sucess with subject as "Alert:Spark SparkAppName Job.".
+		* sendMail(message,SparkApplicationId,MailSubjectLine,"S"): Send message as Sucess with subject as MailSubjectLine.
+		* sendMail(message,SparkApplicationId): Send message as Sucess with subject as "Alert:Spark SparkAppName Job.". 
+		* sendMail(message): Send message as Sucess with subject as "Alert:Spark SparkAppName Job.". It can use for Scala Job without Spark. 
+		
+    * **Default Value**
+		* SparkApplicationId = blank ("")
+		* MailSubjectLine = "Alert:Spark <SparkAppName> Job."
+		* MailType = "S"
+			* F - For Failure 
+			* S or Blank("") - For Success
+	
+
    
   # Sample Spark Code
   
@@ -61,12 +68,16 @@ It is very easy to use, you need to create a object and provide a complete path 
     `try{`
     
    ` /* Logic of Spark Program */`
-   
+ 
+ 	`  val Emailobj = new Email(<path of Conf file>)`
+ 	
+	 `Emailobj.sendMail(msg)`
+	 
     `} catch {`
            `  case e: Exception => ` 
 	   		` val msg = e.toString`    
        `  val Emailobj = new Email(<path of Conf file>)`       
-		`Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)`
+		`Emailobj.sendMail(msg,appId,"","F")`
      `}`
      
      `}`
