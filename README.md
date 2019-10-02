@@ -54,7 +54,7 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
 		
     * **Default Value**
 		* SparkApplicationId = blank ("")
-		* MailSubjectLine = "Alert:Spark <SparkAppName> Job."
+		* MailSubjectLine = "Alert:Spark *SparkAppName* Job."
 		* MailType = "S"  
 			* F - For Failure 
 			* S or Blank("") - For Success
