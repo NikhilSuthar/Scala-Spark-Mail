@@ -30,7 +30,7 @@ class Email(Conf:String) {
     }
   }
 
-  def sendMail(appId:String,text: String):Unit = {
+  def sendMail(text: String,appId:String = "",Subject:String ="",MailType:String="F"):Unit = {
     ConfLoader()
     try{
     val mc = CommandMap.getDefaultCommandMap.asInstanceOf[MailcapCommandMap]
@@ -50,20 +50,30 @@ class Email(Conf:String) {
 
     val session = Session.getDefaultInstance(properties)
     val message = new MimeMessage(session)
-
-    //  println(email_recipient)
     val recipientList:List[String] = Email_recipient.split(",").toList
     recipientList.foreach { recipient =>
       message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient))
     }
-    message.setSubject("Alert: Spark " + SparkAppName + " Job failed.")
-    //val mpart = new MimeMultipart()
+      if(Subject.isEmpty) {
+        message.setSubject("Alert: Spark " + SparkAppName + " Job failed.")
+      }else {
+        message.setSubject(Subject)
+      }
 
-    val msg="Hello ,<br>" +
-      "<br><h3>Spark Job <b>" + SparkAppName + "( " + appId +" )"+ "</b> has been Failed On Date Time " + DateTime + "</h3>" +
-      "<br><u><b>Failed due to below reason:</b></u>"+
-      "<br><p><font "+ "face=" + "Lucida Console" + ">" + text + "</font></p>"
-
+      var msg = ""
+      if(MailType.toUpperCase() == "F") {
+        msg = "<br>" +
+          "<br><h3>Spark Job <b>" + SparkAppName + "( " + appId + " )" + "</b> has been Failed On Date Time " + DateTime + "</h3>" +
+          "<br><u><b>Failed due to below reason:</b></u>" +
+          "<br><p><font " + "face=" + "Lucida Console" + ">" + text + "</font></p>"
+      } else if (MailType.toUpperCase() == "R") {
+        msg="Hello ,<br>" +
+          "<br><h3><b>Please find below Report:</b></h3>" +
+          "<br>" + text
+      } else {
+        msg = "<br>" +
+          "<br><p><font " + "face=" + "Lucida Console" + ">" + text + "</font></p>"
+      }
 
     message.setContent(msg,"text/html")
 

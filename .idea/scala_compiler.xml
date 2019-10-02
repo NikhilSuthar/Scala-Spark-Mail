@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ScalaCompilerConfiguration">
-    <profile name="sbt 1" modules="email,scalamail_4124" />
+    <profile name="sbt 1" modules="scalamail_4124" />
+    <profile name="sbt 2" modules="email">
+      <option name="deprecationWarnings" value="true" />
+    </profile>
   </component>
 </project>
