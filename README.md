@@ -64,8 +64,8 @@ It is very easy to use, you need to create a object and provide a complete path 
    
     `} catch {`
            `  case e: Exception => ` 
-	   		` val msg = e.toString`
-       `  val Emailobj = new Email(<path of Conf file>)`
+	   		` val msg = e.toString`    
+       `  val Emailobj = new Email(<path of Conf file>)`       
 		`Emailobj.sendMail(sparkSession.sparkContext.applicationId,msg)`
      `}`
      
