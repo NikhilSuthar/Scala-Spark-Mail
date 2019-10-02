@@ -55,9 +55,9 @@ class Email(Conf:String) {
     recipientList.foreach { recipient =>
       message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient))
     }
-      if(Subject.isEmpty) {
-        message.setSubject("Alert: Spark " + SparkAppName + " Job failed.")
-      }else {
+      if(Subject.isEmpty && MailType.isEmpty) {
+        message.setSubject("Alert: Spark " + SparkAppName + " Job.")
+      } else {
         message.setSubject(Subject)
       }
 
