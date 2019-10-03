@@ -68,7 +68,7 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
 			try{
 			      /* Logic of Spark Program */
 			     val Emailobj = new Email(<path of Conf file>)
-				 Emailobj.sendMail(msg)
+			     Emailobj.sendMail(msg)
 			    } catch {
 				    case e: Exception => 
 					    val msg = e.toString
