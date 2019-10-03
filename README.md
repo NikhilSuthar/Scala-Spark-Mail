@@ -1,5 +1,5 @@
-# ScalaMail
-This utility uses to send Spark job failure and Success message in mail. It uses smtp protocol to send mail.
+# Scala-Spark-Mail
+Scala-Spark-Mail is the utility which uses to send Spark job failure and Success message in a mail. It uses smtp protocol to send mail and primarily based on javax API. 
 It is very easy to use, you just need to create a object and provide a complete path of Configuratin file where you need to mentioned all properties mentioned in below application.conf file.
 
 https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/application.conf
