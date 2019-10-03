@@ -62,18 +62,19 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
 
    
   # Sample Spark Code
-    	object TestSPark {
-            def main(args: Array[String]): Unit = {
-                try{
-                      /* Logic of Spark Program */
-                     val Emailobj = new Email(<path of Conf file>)
-                          Emailobj.sendMail(msg)
-                    } catch {
-                         case e: Exception => 
-                                    val msg = e.toString
-                                    val Emailobj = new Email(<path of Conf file>)
-                                   Emailobj.sendMail(msg,appId,"","F")
-                               }
-                }
-            }
+    	
+		object TestSPark {
+		    def main(args: Array[String]): Unit = {
+			try{
+			      /* Logic of Spark Program */
+			     val Emailobj = new Email(<path of Conf file>)
+				 Emailobj.sendMail(msg)
+			    } catch {
+				    case e: Exception => 
+					    val msg = e.toString
+					    val Emailobj = new Email(<path of Conf file>)
+					    Emailobj.sendMail(msg,appId,"","F")
+				       }
+			     }
+		      }
  
