@@ -15,6 +15,9 @@ class Email(Conf:String) {
   var Email_password :String= ""
   var Email_recipient:String=""
   var SparkAppName:String=""
+  var Email_Auth:String =""
+  var email_ssl_enable:String = "false"
+  var email_starttls_enable:String = "true"
 
   def ConfLoader():Unit = {
     try{
@@ -23,14 +26,17 @@ class Email(Conf:String) {
     Email_password = config.getString("email.email_password")
     Email_recipient=config.getString("email.email_recipient")
     Email_host=config.getString("email.email_host")
-   Email_port=config.getString("email.email_port")
+    Email_port=config.getString("email.email_port")
+    Email_Auth = config.getString("email.email_auth").toLowerCase
     SparkAppName = config.getString("spark.appName")
+    email_ssl_enable=config.getString("email.email_ssl_enable").toLowerCase
+    email_starttls_enable=config.getString("email.email_starttls_enable").toLowerCase
     } catch {
       case e:Exception => println("[Email:ConfLoader]........Error Occurred:..." + e)
     }
   }
 
-  def sendMail(text: String,appId:String = "",Subject:String ="",MailType:String="F"):Unit = {
+  def sendMail(text: String,appId:String = "",Subject:String ="",MailType:String="",defaultMsg:String =""):Unit = {
     ConfLoader()
     try{
     val mc = CommandMap.getDefaultCommandMap.asInstanceOf[MailcapCommandMap]
@@ -45,8 +51,9 @@ class Email(Conf:String) {
 
     val properties = new Properties()
     properties.put("mail.smtp.port", Email_port)
-    properties.put("mail.smtp.auth", "true")
-    properties.put("mail.smtp.ssl.enable", "false")
+    properties.put("mail.smtp.auth", Email_Auth)
+    properties.put("mail.smtp.ssl.enable", email_ssl_enable)
+      properties.put("mail.smtp.starttls.enable", email_starttls_enable)
 
 
     val session = Session.getDefaultInstance(properties)
@@ -61,18 +68,36 @@ class Email(Conf:String) {
         message.setSubject(Subject)
       }
 
+      var SparkJobName:String = ""
+
+      if (appId.isEmpty || appId.trim != ""){
+        SparkJobName = SparkAppName
+      } else {
+        SparkJobName = SparkAppName + "( " + appId + " )"
+      }
+
+      var defMsg:String = ""
+
       var msg = ""
       if(MailType.toUpperCase() == "F") {
+        if (defaultMsg.isEmpty || defaultMsg.trim() == ""){
+          defMsg = "<br><h3>Spark Job <b>" + SparkJobName + "</b> has been Failed On Date Time" + DateTime + "</h3>" + "<br><u><b>Failed due to below reason:</b></u>"
+        } else {
+          defMsg = "<br><h3>" + defaultMsg + "</b></h3>"
+        }
+
         msg = "<br>" +
-          "<br><h3>Spark Job <b>" + SparkAppName + "( " + appId + " )" + "</b> has been Failed On Date Time " + DateTime + "</h3>" +
-          "<br><u><b>Failed due to below reason:</b></u>" +
+          defMsg +
           "<br><p><font " + "face=" + "Lucida Console" + ">" + text + "</font></p>"
       } else if (MailType.toUpperCase() == "R") {
-        msg="Hello ,<br>" +
-          "<br><h3><b>Please find below Report:</b></h3>" +
-          "<br>" + text
+        if (defaultMsg.isEmpty || defaultMsg.trim() == ""){
+          defMsg = "<br><h3><b>Please find below Report:</b></h3>"
+        } else defMsg = "<br><h3>" + defaultMsg + "</b></h3>"
+          msg = defMsg + "<br>" + text
       } else {
-        msg = "<br>" +
+        defMsg = "<br><h3>" + defaultMsg + "</b></h3>"
+
+        msg = "<br>" + defMsg +
           "<br><p><font " + "face=" + "Lucida Console" + ">" + text + "</font></p>"
       }
 
