@@ -16,20 +16,29 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
 * Add this Jar dependencies in Spark Project (in build.sbt) like below:
   
   `"com.spark.mail" %% "Email" % "0.0.1" from "file:///<path of Jar>/Scala_Spark_Mail.jar"`
+   
+   or 
+   
+   Add module dependencies in intelliJ or Eclipse
+   
+    [click here](https://stackoverflow.com/questions/7065402/how-to-add-external-library-in-intellij-idea) if you don't know how to add external Jar in intelliJ
  
 * Edit configuration file and add below properties 
   	
 		email {
-		email_host="smtp.gmail.com"
-		email_port="587"
-        	email_username= "userName"
-        	email_password="welcome123"
-        	email_recipient="<list of receipent mail with comma separated>"
-        	}
-	
-		spark {
-		appName = "Spark_Test_Job"
-		}
+                email_host="smtp.gmail.com"
+                email_port="587"
+                email_username= "userName"
+                email_password="welcome123"
+                email_recipient="<list of receipent mail with comma separated>"
+                email_auth ="true"
+                email_ssl_enable="false"
+                email_starttls_enable="true"
+                }
+        		
+        spark {
+          appName = "Spark_Test_Job"
+        }
 
 
 * Import method in Spark Scala Object or Class
@@ -44,13 +53,13 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
    # sendMail Method
    sendMail method comes with four parameters, in which three parameters are optional. Please find below details:
     
-    * **sendMail(message, SparkApplicationId, MailSubjectLine,MailType)**
+    * **sendMail(message, SparkApplicationId, MailSubjectLine,MailType,defaultMessage)**
 		* ***sendMail(message,SparkApplicationId,"","F")***: Send message as Failure with subject as "Alert:Spark SparkAppName Job.".
 		* ***sendMail(message,SparkApplicationId,MailSubjectLine,"F")***: Send message as Failure with subject as MailSubjectLine.
-		* ***sendMail(message,SparkApplicationId,"","S")***: Send message as Sucess with subject as "Alert:Spark SparkAppName Job.".
-		* ***sendMail(message,SparkApplicationId,MailSubjectLine,"S")***: Send message as Sucess with subject as MailSubjectLine.
-		* ***sendMail(message,SparkApplicationId)***: Send message as Sucess with subject as "Alert:Spark SparkAppName Job.". 
-		* ***sendMail(message)***: Send message as Sucess with subject as "Alert:Spark SparkAppName Job.". It can use for Scala Job without Spark. 
+		* ***sendMail(message,SparkApplicationId,"","S")***: Send message as Success with subject as "Alert:Spark SparkAppName Job.".
+		* ***sendMail(message,SparkApplicationId,MailSubjectLine,"S")***: Send message as Success with subject as MailSubjectLine.
+		* ***sendMail(message,SparkApplicationId)***: Send message as Success with subject as "Alert:Spark SparkAppName Job.". 
+		* ***sendMail(message)***: Send message as Success with subject as "Alert:Spark SparkAppName Job.". It can use for Scala Job without Spark. 
 		
     * **Default Value**
 		* SparkApplicationId = blank ("")
@@ -58,6 +67,13 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
 		* MailType = "S"  
 			* F - For Failure 
 			* S or Blank("") - For Success
+			* R - For Report
+		* defaultMessage = Message that display at header of message. 
+		     * default value are:
+		        * When MailType is "F" - "Spark Job <SparkJobName> has been Failed On Date Time <DateTime>.
+		                                   Failed due to below reason:"
+		        * When MailType is "R" - "Please find below Report:"
+		        * When MailType is "" Or other than "F" & "R" - No Header
 	
 
    
@@ -68,7 +84,7 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
 			try{
 			      /* Logic of Spark Program */
 			     val Emailobj = new Email(<path of Conf file>)
-			     Emailobj.sendMail(msg)
+			     Emailobj.sendMail(msg,appId)
 			    } catch {
 				    case e: Exception => 
 					    val msg = e.toString
