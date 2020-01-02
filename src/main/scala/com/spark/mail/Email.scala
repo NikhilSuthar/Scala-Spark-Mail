@@ -29,8 +29,8 @@ class Email(Conf:String) {
     Email_port=config.getString("email.email_port")
     Email_Auth = config.getString("email.email_auth").toLowerCase
     SparkAppName = config.getString("spark.appName")
-    email_ssl_enable=config.getString("email.email_ssl_enable").toLowerCase
-    email_starttls_enable=config.getString("email.email_starttls_enable").toLowerCase
+    email_ssl_enable = config.getString("email.email_ssl_enable").toLowerCase
+    email_starttls_enable = config.getString("email.email_starttls_enable").toLowerCase
     } catch {
       case e:Exception => println("[Email:ConfLoader]........Error Occurred:..." + e)
     }
