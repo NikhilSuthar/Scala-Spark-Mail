@@ -21,7 +21,8 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
    
    Add module dependencies in intelliJ or Eclipse
    
-    [click here](https://stackoverflow.com/questions/7065402/how-to-add-external-library-in-intellij-idea) if you don't know how to add external Jar in intelliJ
+   
+    [click here](https://www.scala-sbt.org/1.x/docs/Library-Dependencies.html) for details about adding unmannaged dependecny.
  
 * Edit configuration file and add below properties 
   	
