@@ -70,10 +70,10 @@ class Email(Conf:String) {
 
       var SparkJobName:String = ""
 
-      if (appId.isEmpty || appId.trim != ""){
-        SparkJobName = SparkAppName
+      if (appId.isEmpty || appId.trim == ""){
+        SparkJobName = "'" + SparkAppName + "'"
       } else {
-        SparkJobName = SparkAppName + "( " + appId + " )"
+        SparkJobName = "'" + SparkAppName + "( " + appId + " ) '"
       }
 
       var defMsg:String = ""
