@@ -4,7 +4,7 @@ import java.io.File
 import java.util.{Calendar, Properties}
 import javax.activation.{CommandMap, MailcapCommandMap}
 import javax.mail.{Message, Session}
-import javax.mail.internet.{InternetAddress, MimeMessage}
+import javax.mail.internet.{InternetAddress, MimeBodyPart, MimeMessage, MimeMultipart}
 import com.typesafe.config.ConfigFactory
 
 class Email(Conf:String) {
@@ -36,7 +36,7 @@ class Email(Conf:String) {
     }
   }
 
-  def sendMail(text: String,appId:String = "",Subject:String ="",MailType:String="",defaultMsg:String =""):Unit = {
+  def sendMail(text: String,appId:String = "",Subject:String ="",MailType:String="",defaultMsg:String ="",attachFile:String=""):Unit = {
     ConfLoader()
     try{
     val mc = CommandMap.getDefaultCommandMap.asInstanceOf[MailcapCommandMap]
@@ -101,7 +101,29 @@ class Email(Conf:String) {
           "<br><p><font " + "face=" + "Lucida Console" + ">" + text + "</font></p>"
       }
 
-    message.setContent(msg,"text/html")
+      val fileList:List[String] = attachFile.split(";").toList
+
+      val MessagePart = new MimeMultipart()
+      val BodyPartText = new MimeBodyPart()
+      BodyPartText.setText(msg,"utf-8","html")
+      MessagePart.addBodyPart(BodyPartText)
+      if(attachFile != ""){
+        fileList.foreach { x =>
+          val Attachment = new MimeBodyPart()
+          val fileName = x.split(",").head
+          val filePath = x.split(",").tail.mkString.trim()
+
+          if(filePath != ""|| !filePath.isEmpty) {
+            Attachment.attachFile(filePath)
+            Attachment.setFileName(fileName)
+            MessagePart.addBodyPart(Attachment)
+          } else{
+            Attachment.attachFile(fileName)
+            MessagePart.addBodyPart(Attachment)
+          }
+        }
+      }
+      message.setContent(MessagePart)
 
 
     val transport = session.getTransport("smtp")
@@ -111,6 +133,7 @@ class Email(Conf:String) {
     transport.sendMessage(message, message.getAllRecipients)
 
     transport.close()
+      println("[Email:sendMail]........Email Sent Successfully:...")
     } catch {
       case e:Exception => println("[Email:sendMail]........Error Occurred:..." + e)
     }

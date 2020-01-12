@@ -54,7 +54,7 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
    # sendMail Method
    sendMail method comes with four parameters, in which three parameters are optional. Please find below details:
     
-    * **sendMail(message, SparkApplicationId, MailSubjectLine,MailType,defaultMessage)**
+    * **sendMail(message, SparkApplicationId, MailSubjectLine,MailType,defaultMessage,ListOfAttachments)**
 		* ***sendMail(message,SparkApplicationId,"","F")***: Send message as Failure with subject as "Alert:Spark SparkAppName Job.".
 		* ***sendMail(message,SparkApplicationId,MailSubjectLine,"F")***: Send message as Failure with subject as MailSubjectLine.
 		* ***sendMail(message,SparkApplicationId,"","S")***: Send message as Success with subject as "Alert:Spark SparkAppName Job.".
@@ -75,8 +75,13 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
 		                                   Failed due to below reason:"
 		        * When MailType is "R" - "Please find below Report:"
 		        * When MailType is "" Or other than "F" & "R" - No Header
-	
-
+		*  ListOfAttachments = Complete paths of all attachment files separated by Semi Colon (;).
+		      * default value is blank.
+		      * it take String of complete paths of all files separated by Semi Colon (;) and Name separated by Comma withing File path as below. 
+		      * When pass value as  - "FilePath1;FilePath2"	or "FilePath"
+		                            -  It send all files with Name as file system.
+              * When pass value as  - "Name1,FilePath1;Name2,FilePath2"	or "Name,FilePath"
+		                            -  It send all files with respective Name separated by comma (,) with File Path.
    
   # Sample Spark Code
     	
