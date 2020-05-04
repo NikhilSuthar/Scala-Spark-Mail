@@ -77,7 +77,7 @@ https://github.com/NikhilSuthar/ScalaMail/blob/master/src/main/resource/applicat
 		        * When MailType is "" Or other than "F" & "R" - No Header
 		*  ListOfAttachments = Complete paths of all attachment files separated by Semi Colon (;).
 		      * default value is blank.
-		      * it take String of complete paths of all files separated by Semi Colon (;) and Name separated by Comma withing File path as below. 
+		      * It take String of complete paths of all files separated by Semi Colon (;) and Name separated by Comma within File path as below. 
 		      * When pass value as  - "FilePath1;FilePath2"	or "FilePath"
 		                            -  It send all files with Name as file system.
               * When pass value as  - "Name1,FilePath1;Name2,FilePath2"	or "Name,FilePath"
